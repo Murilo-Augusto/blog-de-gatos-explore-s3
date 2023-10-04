@@ -10,8 +10,6 @@
   --color-base-cyan: #065E7C;
   --color-base-lights-cyan: #387E96;
   --color-base-white: #fff;
-
-
 }
 
 body {
@@ -20,36 +18,33 @@ body {
   background-color: var(--color-base-white);
 }
 
-.page {
+#page {
   display: grid;
-  grid-template-areas:
-  "header"
-  "main"
-  "aside"
-  "footer"; 
+  grid-template-areas: 
+  'header'
+  'content'
+  'footer';
 
   height: 100vh;
+  grid-template-rows: max-content 1fr max-content;
 }
 
 header {
   grid-area: header;
-
   padding: 1.2rem 2.8rem;
-  width: 100%;
-  
   background-color: var(--color-base-cyan);
-}
-
-header form {
-  flex: 1;
 }
 
 header > div {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2.6rem;
   max-width: 38.2rem;
   margin: 0 auto;
+}
+
+header form {
+  flex: 1;
 }
 
 .input-wrapper label {
@@ -83,21 +78,24 @@ header > div {
   border-radius: 50%;
 }
 
-main {
-  grid-area: main;
+#container {
+  grid-area: content;
+  display: grid;
+  row-gap: 3.4rem;
+  margin-bottom: 3.4rem;
 }
 
-main > img {
+main img {
   width: 100%;
   object-fit: cover;
   display: block;
 }
 
-section {
+.content {
   max-width: 38.2rem;
-  margin: 3.4rem auto;
-  display: grid;
-  row-gap: 3.4rem;
+  margin: 3.4rem auto 0;
+  padding: 0 2rem;
+  box-sizing: content-box;
 }
 
 h1 {
@@ -106,11 +104,15 @@ h1 {
   line-height: 3.84rem;
 }
 
-section div:first-child {
+.content {
+  display: grid;
+  row-gap: 3.4rem;
+}
+
+.content div:first-child {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.8rem;
-  max-width: 34.2rem;
 }
 
 .buttons {
@@ -129,43 +131,42 @@ section div:first-child {
   background-color: var(--color-base-cyan);
 }
 
-section div:first-child button:hover {
+.content div:first-child button:hover {
   background-color: #387E96;
   cursor: pointer;
 }
 
-section div:first-child button img {
+.content div:first-child button img {
   width: 1.6rem;
 }
 
 aside {
-  grid-area: aside;
-  max-width: 38.42rem;
-  margin: 3.4rem auto;
   display: grid;
   row-gap: 3.2rem;
+  max-width: 38.42rem;
+  margin: auto;
+  padding: 0 2rem;
+  box-sizing: content-box;
 }
 
 .post {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 1.6rem;
   font-size: 1.4rem;
 }
 
 .post img {
-  width: 100%;
   max-width: 15rem;
-  height: 8.4rem;
+
   object-fit: cover;
   display: block;
   border-radius: 5px;
 }
 
 .post-content {
-  display: grid;
-  row-gap: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .post-content h3 {
@@ -175,79 +176,57 @@ aside {
 
 footer {
   grid-area: footer;
-  display: grid;
   height: 6.4rem;
-  place-content: center;
-
-  background-color: #387E96;
+  display: grid;
+  place-items: center;
   color: var(--color-base-white);
   font-weight: 600;
+  background-color: var(--color-base-lights-cyan);
 }
 
-@media (min-width: 770px) {
-  .page {
-    grid-template-areas:
-    "header header header"
-    "main main aside"
-    "footer footer footer";
-    grid-template-rows: 7.2rem 1fr max-content;
+@media (min-width: 1030px) {
+  #page {
     row-gap: 4rem;
   }
-
+  
   header > div {
-    max-width: 90%;
-  }
-
-  main {
-    max-width: 80rem;
-    margin: 0 auto;
-  }
-  
-  main > img {
-    border-radius: 5px;
-  }
-  
-  section {
-    max-width: inherit;
-  }
-
-  section div:first-child {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    max-width: inherit;
-  }
-
-  aside {
-    display: grid;
-    row-gap: 3.2rem;
-    grid-auto-rows: max-content;
-  }
-  
-  .post {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.6rem;
-    font-size: 1.4rem;
-  }
-  
-  .post img {
     width: 100%;
-    max-width: 15rem;
-    height: 8.4rem;
+    max-width: 122.2rem;
+  }
+  
+  #container {
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: start;
+    margin-bottom: 0;
+    padding: 0 2rem;
+    column-gap: 3.4rem;
+  }
+  
+  main img {
+    width: 100%;
     object-fit: cover;
     display: block;
-    border-radius: 5px;
   }
   
-  .post-content {
-    display: grid;
-    row-gap: 1.3rem;
+  .content {
+    max-width: 80rem;
+    margin: 3.4rem 0 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .content div:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
   
-  .post-content h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
+  aside {
+    align-items: start;
+    grid-auto-rows: max-content;
+    margin: 0;
+    padding: 0;
   }
 }
